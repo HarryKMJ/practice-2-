@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduHive.ke - Transform Your Grades Today</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Fredoka:wght@400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            background: #f5f7fa;
+        }
+        
+        .bee {
+            position: fixed;
+            font-size: 30px;
+            animation: fly 15s infinite;
+            z-index: 100;
+            pointer-events: none;
+        }
+        
+        .bee:nth-child(1) { top: 10%; animation-delay: 0s; }
+        .bee:nth-child(2) { top: 30%; animation-delay: 5s; }
+        .bee:nth-child(3) { top: 60%; animation-delay: 10s; }
+        .bee:nth-child(4) { top: 80%; animation-delay: 7s; }
+        
+        @keyframes fly {
+            0% { left: -50px; transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-30px) rotate(10deg); }
+            50% { left: 50%; transform: translateY(0) rotate(-10deg); }
+            75% { transform: translateY(30px) rotate(5deg); }
+            100% { left: 110%; transform: translateY(0) rotate(0deg); }
+        }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+            position: relative;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,138.7C960,139,1056,117,1152,101.3C1248,85,1344,75,1392,69.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            z-index: 10;
+            position: relative;
+        }
+        
+        .logo {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .tagline {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 18px 45px;
+            background: #FFC107;
+            color: #333;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            margin: 10px;
+            font-family: 'Fredoka', sans-serif;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+            background: #FFD54F;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            font-family: 'Fredoka', sans-serif;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .section {
+            padding: 80px 20px;
+            background: white;
+        }
+        
+        .section:nth-child(even) {
+            background: #f5f7fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #667eea;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .pricing-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 40px 30px;
+            color: white;
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .pricing-card.popular {
+            border: 4px solid #FFC107;
+            box-shadow: 0 15px 40px rgba(255,193,7,0.4);
+        }
+        
+        .badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #FFC107;
+            color: #333;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        
+        .package-name {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .package-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 20px 0;
+        }
+        
+        .package-sessions {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        .package-save {
+            color: #FFC107;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .features {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .features li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            font-size: 0.95rem;
+        }
+        
+        .features li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #FFC107;
+            font-weight: 700;
+        }
+        
+        .level-prices {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+        
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .benefit-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .benefit-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .benefit-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+        
+        .rates-table {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .rate-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .rate-row:last-child {
+            border-bottom: none;
+        }
+        
+        .rate-label {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .rate-price {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.3rem;
+            color: #667eea;
+            font-weight: 700;
+        }
+        
+        .special-packages {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .special-card {
+            background: linear-gradient(135deg, #FFC107 0%, #FF9800 100%);
+            border-radius: 20px;
+            padding: 35px;
+            color: #333;
+            transition: transform 0.3s;
+        }
+        
+        .special-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .special-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .testimonial {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            text-align: right;
+            margin-top: 15px;
+            font-weight: 600;
+            font-style: normal;
+        }
+        
+        .comparison-table {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-family: 'Fredoka', sans-serif;
+        }
+        
+        tr:hover {
+            background: #f5f7fa;
+        }
+        
+        .contact-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .contact-methods {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-method {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            min-width: 250px;
+        }
+        
+        .contact-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .faq-item {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 15px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .faq-item:hover {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        
+        .faq-question {
+            font-weight: 600;
+            color: #667eea;
+            font-size: 1.1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, margin-top 0.3s ease;
+            color: #333;
+        }
+        
+        .faq-answer.active {
+            max-height: 200px;
+            margin-top: 15px;
+        }
+        
+        .faq-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+        
+        .faq-icon.active {
+            transform: rotate(180deg);
+        }
+        
+        .honeycomb {
+            position: fixed;
+            opacity: 0.05;
+            font-size: 100px;
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+            z-index: 1;
+        }
+        
+        .honeycomb:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .honeycomb:nth-child(2) { top: 50%; right: 10%; animation-delay: 2s; }
+        .honeycomb:nth-child(3) { bottom: 10%; left: 20%; animation-delay: 4s; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .logo { font-size: 2.5rem; }
+            .tagline { font-size: 1.3rem; }
+            .section-title { font-size: 2rem; }
+            .stats { gap: 20px; }
+            table { font-size: 0.85rem; }
+            th, td { padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bee">🐝</div>
+    <div class="bee">🐝</div>
+    <div class="bee">🐝</div>
+    <div class="bee">🐝</div>
+    
+    <div class="honeycomb">🍯</div>
+    <div class="honeycomb">🍯</div>
+    <div class="honeycomb">🍯</div>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <div class="logo">🐝 EduHive.ke</div>
+            <p class="tagline">Transform Your Grades with Kenya's Sweetest Online Tutoring</p>
+            <a href="#pricing" class="cta-button">Explore Packages</a>
+            <a href="#contact" class="cta-button" style="background: white; color: #667eea;">Book Now</a>
+            
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number">60%</div>
+                    <div class="stat-label">Total Savings</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">KSh 500</div>
+                    <div class="stat-label">Starting From</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Why Choose EduHive? 🎯</h2>
+            <div class="benefits">
+                <div class="benefit-card">
+                    <div class="benefit-icon">💰</div>
+                    <div class="benefit-title">Unbeatable Value</div>
+                    <p>From KSh 500/hour vs traditional KSh 1,000-2,000. Save up to 60% on quality tutoring!</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🏠</div>
+                    <div class="benefit-title">Zero Travel Costs</div>
+                    <p>No transport fees (KSh 200-500 saved), no wasted time (1-2 hours saved per session)</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📚</div>
+                    <div class="benefit-title">CBC & 8-4-4 Experts</div>
+                    <p>Grade 4-12 CBC and Form 1-4 (8-4-4). All subjects, all levels covered</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">✅</div>
+                    <div class="benefit-title">Verified Tutors</div>
+                    <p>Rated and reviewed teachers matched to your specific needs within 24 hours</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📊</div>
+                    <div class="benefit-title">Digital Progress Tracking</div>
+                    <p>Detailed reports vs manual tracking. See improvement in real-time</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💯</div>
+                    <div class="benefit-title">Money-Back Guarantee</div>
+                    <p>Not satisfied after first session? Full refund, no questions asked!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section" id="hourly-rates">
+        <div class="container">
+            <h2 class="section-title">Pay-As-You-Go Rates ⏱️</h2>
+            <div class="rates-table">
+                <div class="rate-row">
+                    <div>
+                        <div class="rate-label">Upper Primary (Grade 4-6)</div>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 5px;">
+                            All learning areas, homework help, Grade 6 KPSEA prep
+                        </div>
+                    </div>
+                    <div class="rate-price">KSh 500/hr</div>
+                </div>
+                <div class="rate-row">
+                    <div>
+                        <div class="rate-label">Junior Secondary (Grade 7-9)</div>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 5px;">
+                            All subjects, CBC Junior School, Grade 9 KJSEA prep
+                        </div>
+                    </div>
+                    <div class="rate-price">KSh 800/hr</div>
+                </div>
+                <div class="rate-row">
+                    <div>
+                        <div class="rate-label">Senior Secondary (Grade 10-12)</div>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 5px;">
+                            All subjects, KCBE prep, career pathway support
+                        </div>
+                    </div>
+                    <div class="rate-price">KSh 800/hr</div>
+                </div>
+                <div class="rate-row">
+                    <div>
+                        <div class="rate-label">Form 1-4 (8-4-4 System)</div>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 5px;">
+                            All subjects, KCSE preparation, past papers included
+                        </div>
+                    </div>
+                    <div class="rate-price">KSh 800/hr</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section" id="pricing">
+        <div class="container">
+            <h2 class="section-title">Package Deals - Best Value! 🎁</h2>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="package-name">💫 Bronze</div>
+                    <div class="package-sessions">5 Sessions</div>
+                    <div class="package-price">From KSh 2,375</div>
+                    <div class="package-save">Save up to KSh 200</div>
+                    <div class="level-prices">
+                        <div>Upper Primary: KSh 2,375</div>
+                        <div>Secondary/Form: KSh 3,800</div>
+                    </div>
+                    <ul class="features">
+                        <li>Flexible scheduling</li>
+                        <li>Progress tracking</li>
+                        <li>WhatsApp support between sessions</li>
+                        <li>All subjects covered</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="package-name">⭐ Silver</div>
+                    <div class="package-sessions">10 Sessions</div>
+                    <div class="package-price">From KSh 4,750</div>
+                    <div class="package-save">Save up to KSh 400</div>
+                    <div class="level-prices">
+                        <div>Upper Primary: KSh 4,750</div>
+                        <div>Secondary/Form: KSh 7,600</div>
+                    </div>
+                    <ul class="features">
+                        <li>All Bronze benefits</li>
+                        <li>Monthly progress report</li>
+                        <li>Study materials provided</li>
+                        <li>Priority scheduling</li>
+                        <li>3 months validity</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card popular">
+                    <div class="badge">MOST POPULAR 🌟</div>
+                    <div class="package-name">🏆 Gold</div>
+                    <div class="package-sessions">20 Sessions + 1 FREE!</div>
+                    <div class="package-price">From KSh 9,000</div>
+                    <div class="package-save">Save up to KSh 1,600</div>
+                    <div class="level-prices">
+                        <div>Upper Primary: KSh 9,000</div>
+                        <div>Secondary/Form: KSh 14,400</div>
+                    </div>
+                    <ul class="features">
+                        <li>All Silver benefits</li>
+                        <li>Bi-weekly progress calls</li>
+                        <li>Comprehensive study plan</li>
+                        <li>Exam strategy sessions</li>
+                        <li>Access to recorded sessions</li>
+                        <li>4 months validity</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card popular">
+                    <div class="badge">BEST VALUE 💎</div>
+                    <div class="package-name">👑 Platinum</div>
+                    <div class="package-sessions">40 Sessions</div>
+                    <div class="package-price">From KSh 17,000</div>
+                    <div class="package-save">Save up to KSh 4,800</div>
+                    <div class="level-prices">
+                        <div>Upper Primary: KSh 17,000</div>
+                        <div>Secondary/Form: KSh 27,200</div>
+                    </div>
+                    <ul class="features">
+                        <li>All Gold benefits</li>
+                        <li>Weekly progress reports</li>
+                        <li>Multiple subject support</li>
+                        <li>24/7 WhatsApp homework help</li>
+                        <li>Free mock exams</li>
+                        <li>6 months validity</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section" id="special">
+        <div class="container">
+            <h2 class="section-title">Specialized Programs 🎓</h2>
+            <div class="special-packages">
+                <div class="special-card">
+                    <div class="special-title">⚡ Exam Crash Course</div>
+                    <div style="font-size: 1.8rem; font-weight: 800; margin: 15px 0;">From KSh 7,500</div>
+                    <div style="margin-bottom: 15px;"><strong>12 Intensive Sessions</strong></div>
+                    <ul class="features" style="color: #333;">
+                        <li>Past paper analysis</li>
+                        <li>Exam techniques & strategies</li>
+                        <li>Weak area focus</li>
+                        <li>Daily WhatsApp check-ins</li>
+                        <li>Time management skills</li>
+                        <li>Confidence building</li>
+                    </ul>
+                    <div style="margin-top: 15px; font-size: 0.9rem;">
+                        <div>Grade 6: KSh 7,500</div>
+                        <div>Grade 9/12/Form 4: KSh 11,000</div>
+                    </div>
+                </div>
+                
+                <div class="special-card">
+                    <div class="special-title">📖 Subject Mastery</div>
+                    <div style="font-size: 1.8rem; font-weight: 800; margin: 15px 0;">From KSh 9,500</div>
+                    <div style="margin-bottom: 15px;"><strong>16 Sessions (8 weeks)</strong></div>
+                    <ul class="features" style="color: #333;">
+                        <li>Deep dive into one subject</li>
+                        <li>Comprehensive curriculum coverage</li>
+                        <li>Regular assessments</li>
+                        <li>Study materials included</li>
+                        <li>Progress guarantees</li>
+                        <li>Certificate of completion</li>
+                    </ul>
+                    <div style="margin-top: 15px; font-size: 0.9rem;">
+                        <div>Upper Primary: KSh 9,500</div>
+                        <div>Secondary/Form: KSh 14,000</div>
+                    </div>
+                </div>
+                
+                <div class="special-card">
+                    <div class="special-title">👥 Group Tutoring</div>
+                    <div style="font-size: 1.8rem; font-weight: 800; margin: 15px 0;">20% OFF</div>
+                    <div style="margin-bottom: 15px;"><strong>2-4 Students Together</strong></div>
+                    <ul class="features" style="color: #333;">
+                        <li>Interactive group sessions</li>
+                        <li>Collaborative learning</li>
+                        <li>Shared study materials</li>
+                        <li>Perfect for siblings/friends</li>
+                        <li>Upper Primary: KSh 400/hr</li>
+                        <li>Secondary/Form: KSh 640/hr</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Add-On Services 🎯</h2>
+            <div class="benefits">
+                <div class="benefit-card">
+                    <div class="benefit-icon">📊</div>
+                    <div class="benefit-title">Progress Report</div>
+                    <p><strong>KSh 800</strong></p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Detailed analysis, strengths/weaknesses, improvement recommendations</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📝</div>
+                    <div class="benefit-title">Mock Exam & Marking</div>
+                    <p><strong>KSh 1,200</strong></p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Full timed exam simulation, professional marking, detailed feedback</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📚</div>
+                    <div class="benefit-title">Study Materials Package</div>
+                    <p><strong>KSh 1,500</strong></p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Subject notes, 5 years past papers, revision guides, practice questions</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💬</div>
+                    <div class="benefit-title">Homework Help Subscription</div>
+                    <p><strong>KSh 2,500/month</strong></p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Daily WhatsApp support, 2-hour response time, no booking needed</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section" id="offers">
+        <div class="container">
+            <h2 class="section-title">Special Offers & Discounts 🎉</h2>
+            <div class="benefits">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🤝</div>
+                    <div class="benefit-title">Referral Program</div>
+                    <p><strong>KSh 500 Credit</strong> for you AND your friend!</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Unlimited referrals, credits never expire</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">👨‍👩‍👧‍👦</div>
+                    <div class="benefit-title">Sibling Discount</div>
+                    <p><strong>15% OFF</strong> for 2+ siblings</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Different levels/subjects OK, must book together</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">⏰</div>
+                    <div class="benefit-title">Early Bird Discount</div>
+                    <p><strong>10% OFF</strong> packages for next term</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Book before term starts, lock in current rates</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🏆</div>
+                    <div class="benefit-title">Loyalty Reward</div>
+                    <p><strong>10% OFF</strong> after 20+ sessions</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Automatic VIP status, priority tutor selection</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📚</div>
+                    <div class="benefit-title">Bundle Discount</div>
+                    <p><strong>10% OFF</strong> when booking 3+ subjects</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Split sessions among subjects, comprehensive support</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🌅</div>
+                    <div class="benefit-title">Off-Peak Discount</div>
+                    <p><strong>5% OFF</strong> weekday 10am-4pm sessions</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Flexible scheduling saves you money!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Payment Options 💳</h2>
+            <div class="benefits">
+                <div class="benefit-card">
+                    <div class="benefit-icon">📱</div>
+                    <div class="benefit-title">M-Pesa</div>
+                    <p>Preferred method</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Instant confirmation, secure & fast</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🏦</div>
+                    <div class="benefit-title">Bank Transfer</div>
+                    <p>Available for all packages</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Direct bank deposits accepted</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💵</div>
+                    <div class="benefit-title">Cash Payment</div>
+                    <p>In-person arrangements</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">For local meetups only</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📆</div>
+                    <div class="benefit-title">Installment Plans</div>
+                    <p>For packages over KSh 10,000</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">50/50 split or 3 monthly payments</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 40px; background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); color: white; padding: 30px; border-radius: 15px; text-align: center;">
+                <h3 style="font-family: 'Fredoka', sans-serif; font-size: 2rem; margin-bottom: 15px;">💯 Money-Back Guarantee</h3>
+                <p style="font-size: 1.2rem;">Not satisfied after your first paid session? Full refund, no questions asked!</p>
+                <p style="margin-top: 10px; opacity: 0.9;">Valid for first session only • Must notify within 24 hours</p>
+            </div>
+        </div>
+    </section>
+    
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">What Parents Are Saying 💬</h2>
+            <div class="testimonial">
+                <p style="font-size: 1.1rem;">"I was paying KSh 1,500 per hour for a home tutor plus transport. With EduHive, I pay KSh 500 per session and my daughter actually enjoys learning now!"</p>
+                <div class="testimonial-author">- Mrs. Kimani, Grade 5 Parent</div>
+            </div>
+            <div class="testimonial">
+                <p style="font-size: 1.1rem;">"The Gold Package saved me so much money! 20 sessions for what I used to pay for 10. Plus the quality is better!"</p>
+                <div class="testimonial-author">- Mr. David Onsomu, Form 3 Parent</div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section" id="faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions ❓</h2>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Q: Can I switch tutors if we're not a good match?
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">A: Absolutely! We'll match you with a new tutor at no extra cost.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Q: What if I need to pause my package?
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">A: Packages can be paused for up to 2 months for medical/family emergencies.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Q: Do unused sessions expire?
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">A: Sessions are valid for the period stated in each package (3-6 months depending on package).</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Q: Can I share my package with a sibling?
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">A: Yes! Sessions can be split between siblings at the same level.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Q: Are there any hidden fees?
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">A: Never! The price you see is what you pay. No booking fees, no platform fees.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Q: Do you support both CBC and 8-4-4 systems?
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">A: Yes! We have tutors experienced in both the CBC curriculum (Grades 4-12) and the 8-4-4 system (Form 1-4).</div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section" style="background: linear-gradient(135deg, #FFC107 0%, #FF9800 100%); text-align: center;">
+        <div class="container">
+            <h2 style="font-family: 'Fredoka', sans-serif; font-size: 2.5rem; color: #333; margin-bottom: 30px;">How to Book 📝</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto;">
+                <div style="background: white; padding: 25px; border-radius: 15px;">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">1️⃣</div>
+                    <div style="font-weight: 700; font-size: 1.2rem; margin-bottom: 10px;">Choose Package</div>
+                    <div style="font-size: 0.9rem;">Browse options and select what fits</div>
+                </div>
+                <div style="background: white; padding: 25px; border-radius: 15px;">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">2️⃣</div>
+                    <div style="font-weight: 700; font-size: 1.2rem; margin-bottom: 10px;">Contact Us</div>
+                    <div style="font-size: 0.9rem;">WhatsApp, email, or DM us</div>
+                </div>
+                <div style="background: white; padding: 25px; border-radius: 15px;">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">3️⃣</div>
+                    <div style="font-weight: 700; font-size: 1.2rem; margin-bottom: 10px;">Get Matched</div>
+                    <div style="font-size: 0.9rem;">Perfect tutor within 24 hours</div>
+                </div>
+                <div style="background: white; padding: 25px; border-radius: 15px;">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">4️⃣</div>
+                    <div style="font-weight: 700; font-size: 1.2rem; margin-bottom: 10px;">Make Payment</div>
+                    <div style="font-size: 0.9rem;">Secure M-Pesa payment</div>
+                </div>
+                <div style="background: white; padding: 25px; border-radius: 15px;">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">5️⃣</div>
+                    <div style="font-weight: 700; font-size: 1.2rem; margin-bottom: 10px;">Start Learning!</div>
+                    <div style="font-size: 0.9rem;">First session within 48 hours</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Start Your Success Story Today! 🚀</h2>
+            <p style="font-size: 1.3rem; margin-bottom: 20px;">Book Now and Witness Grade Improvement</p>
+            
+            <div class="contact-methods">
+                <div class="contact-method">
+                    <div class="contact-icon">📱</div>
+                    <div style="font-family: 'Fredoka', sans-serif; font-size: 1.3rem; margin-bottom: 10px;">WhatsApp</div>
+                    <div style="font-size: 1.5rem; font-weight: 700;">0748040969</div>
+                </div>
+                <div class="contact-method">
+                    <div class="contact-icon">📧</div>
+                    <div style="font-family: 'Fredoka', sans-serif; font-size: 1.3rem; margin-bottom: 10px;">Email</div>
+                    <div style="font-size: 1.2rem; font-weight: 600;">eduhive.ke@gmail.com</div>
+                </div>
+                <div class="contact-method">
+                    <div class="contact-icon">💬</div>
+                    <div style="font-family: 'Fredoka', sans-serif; font-size: 1.3rem; margin-bottom: 10px;">Social Media</div>
+                    <div style="font-size: 1.2rem; font-weight: 600;">@eduhive.ke</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 50px;">
+                <a href="https://wa.me/254748040969" class="cta-button" style="background: white; color: #667eea; font-size: 1.3rem; padding: 20px 50px;">📱 Book Now on WhatsApp 🐝</a>
+            </div>
+            
+            <div style="margin-top: 50px; font-size: 1.1rem; opacity: 0.9;">
+                🌍 Online Tutoring Anywhere in Kenya
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+    <script src="accordion.js"></script>
+</body>
+</html>
